@@ -1,19 +1,18 @@
 class Queue
-  attr_accessor :queue
-
   def initialize
     @queue = []
   end
 
   def enqueue(el)
-    queue.push(el)
+    @queue.push(el)
+    el
   end
 
   def dequeue
-    queue.shift
+    @queue.shift
   end
 
   def show
-    queue.dup
+    @queue.dup
   end
 end
