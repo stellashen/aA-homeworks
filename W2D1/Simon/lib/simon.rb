@@ -15,6 +15,7 @@ class Simon
     end
     game_over_message
     reset_game
+    self.play
   end
 
   def take_turn
@@ -30,7 +31,16 @@ class Simon
   end
 
   def require_sequence
-
+    count_guess = 0
+    while count_guess < sequence_length
+      puts "Please enter a color: red blue green yellow."
+      response = gets.chomp
+      if response != seq[count_guess]
+        @game_over = true
+        return
+      end
+      count_guess += 1
+    end
   end
 
   def add_random_color
@@ -38,11 +48,11 @@ class Simon
   end
 
   def round_success_message
-
+    puts "Congrats! You remember all the colors correctly!"
   end
 
   def game_over_message
-
+    puts "Oops! Game is over. Try again."
   end
 
   def reset_game
@@ -51,3 +61,11 @@ class Simon
     @seq = []
   end
 end
+
+=begin
+To play the game, under terminal
+~/Dropbox/AA/aA-homeworks/W2D1/Simon (master)$ pry
+[1] pry(main)> load 'lib/simon.rb'
+[2] pry(main)> game = Simon.new
+[3] pry(main)> game.play
+=end
