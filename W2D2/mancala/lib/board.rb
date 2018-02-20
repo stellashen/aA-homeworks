@@ -77,9 +77,20 @@ class Board
   end
 
   def one_side_empty?
+    return true if (0..5).all? { |i| @cups[i].empty? }
+    return true if (7..12).all? { |i| @cups[i].empty? }
+    false
   end
 
   def winner
+    case @cups[6].count <=> @cups[13].count
+    when 0
+      :draw
+    when -1
+      @name2
+    when 1
+      @name1
+    end
   end
 
   private
