@@ -30,26 +30,19 @@ class Board
     # 1. empty the selected cup
     @cups[start_pos] = Array.new
 
-    # 2. distribute the stones from the selected cup    
-    skip = false
-    num_stones.times do |idx|
-      idx_to_place_stone = start_pos + 1 + idx
-      # skip the opponent's store
-      if idx_to_place_stone == opponent_store_pos
-        skip = true
-        next
+    # 2. distribute the stones from the selected cup
+    num_placed = 0
+    idx_to_place_stone = start_pos + 1
+    while num_placed < num_stones
+      unless idx_to_place_stone == opponent_store_pos
+        distribute_stone(idx_to_place_stone)
+        num_placed += 1
       end
-      # add one stone to the current cup
-      distribute_stone(idx_to_place_stone)
+      idx_to_place_stone += 1
     end
 
-    # 3. if we have skipped a cup, we need to place the last stone
-    if skip == true
-      distribute_stone(start_pos + num_stones + 1)
-      ending_cup_idx = start_pos + num_stones + 1
-    else
-      ending_cup_idx = start_pos + num_stones
-    end
+    # 3. display board
+    render
 
     # 4. ending situations: if the ending cup
     # a) has stones already in it
@@ -58,7 +51,7 @@ class Board
     # => returns :switch
     # c) is an empty cup
     # => returns :prompt
-    next_turn(ending_cup_idx)
+    next_turn(idx_to_place_stone - 1)
   end
 
   def distribute_stone(idx)
