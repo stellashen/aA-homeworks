@@ -11,7 +11,7 @@ touch Gemfile
 
 describe Dessert do
   subject(:croissant) { Dessert.new("croissant", 12, chef) }
-  let(:chef) { double("Jane") }
+  let(:chef) { double("Jane", name: "Jane") }
 
   describe "#initialize" do
     it "sets a type" do
@@ -54,16 +54,26 @@ describe Dessert do
   end
 
   describe "#eat" do
-    it "subtracts an amount from the quantity"
+    it "subtracts an amount from the quantity" do
+      croissant.eat(5)
+      expect(croissant.quantity).to eq(7)
+    end
 
-    it "raises an error if the amount is greater than the quantity"
+    it "raises an error if the amount is greater than the quantity" do
+      expect { croissant.eat(20) }.to raise_error("not enough left!")
+    end
   end
 
   describe "#serve" do
-    it "contains the titleized version of the chef's name"
+    it "contains the titleized version of the chef's name" do
+      titleized_name = chef.name.capitalize
+      expect(croissant.serve.split[0]).to eq(titleized_name)
+    end
   end
 
   describe "#make_more" do
-    it "calls bake on the dessert's chef with the dessert passed in"
+    it "calls bake on the dessert's chef with the dessert passed in" do
+
+    end
   end
 end
