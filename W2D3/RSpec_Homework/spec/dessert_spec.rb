@@ -3,19 +3,33 @@ require 'dessert'
 
 =begin
 Instructions: implement all of the pending specs (the `it` statements without blocks)! Be sure to look over the solutions when you're done.
+
+To set up the environment, under Terminal:
+touch Gemfile
+
 =end
 
 describe Dessert do
+  subject(:croissant) { Dessert.new("croissant", 12, chef) }
   let(:chef) { double("chef") }
 
   describe "#initialize" do
-    it "sets a type"
+    it "sets a type" do
+      expect(croissant.type).to eq("croissant")
+    end
 
-    it "sets a quantity"
+    it "sets a quantity" do
+      expect(croissant.quantity).to eq(12)
+    end
 
-    it "starts ingredients as an empty array"
+    it "starts ingredients as an empty array" do
+      expect(croissant.ingredients).to eq([])
+    end
 
-    it "raises an argument error when given a non-integer quantity"
+    it "raises an argument error when given a non-integer quantity" do
+      expect { Dessert.new("ice cream", "wrong", chef) }.to
+        raise_error(ArgumentError)
+    end
   end
 
   describe "#add_ingredient" do
