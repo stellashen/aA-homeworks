@@ -34,14 +34,15 @@ describe Dessert do
   describe "#add_ingredient" do
     it "adds an ingredient to the ingredients array" do
       croissant.add_ingredient("egg")
-      expect { croissant.ingredients }.to eq(["egg"])
+      arr = croissant.ingredients
+      expect(arr).to eq(["egg"])
     end
   end
 
   describe "#mix!" do
     it "shuffles the ingredient array" do
       ingredients_list = ["milk", "egg", "sugar", "butter", "love"]
-      4.times do |idx|
+      5.times do |idx|
         croissant.ingredients << ingredients_list[idx]
       end
       ingredients_before_mix = croissant.ingredients
