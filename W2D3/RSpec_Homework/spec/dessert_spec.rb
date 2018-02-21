@@ -45,7 +45,7 @@ describe Dessert do
       5.times do |idx|
         croissant.ingredients << ingredients_list[idx]
       end
-      ingredients_before_mix = croissant.ingredients
+      ingredients_before_mix = croissant.ingredients.dup
       croissant.mix!
       ingredients_after_mix = croissant.ingredients
       expect(ingredients_after_mix).to_not eq(ingredients_before_mix)
