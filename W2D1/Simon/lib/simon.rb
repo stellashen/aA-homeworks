@@ -15,6 +15,8 @@ class Simon
     end
     game_over_message
     reset_game
+    puts "New game is about to start!"
+    sleep 2
     self.play
   end
 
@@ -22,7 +24,10 @@ class Simon
     show_sequence
     require_sequence
     @sequence_length += 1
-    round_success_message unless game_over
+    unless game_over
+      round_success_message
+      sleep 2
+    end
   end
 
   def show_sequence
@@ -38,7 +43,8 @@ class Simon
   def require_sequence
     count_guess = 0
     while count_guess < sequence_length
-      puts "Please enter a color: red blue green yellow."
+      puts "Please enter the colors you saw one at a time:
+            red blue green yellow."
       response = gets.chomp
       if response != seq[count_guess]
         @game_over = true
