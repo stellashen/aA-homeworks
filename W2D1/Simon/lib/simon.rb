@@ -23,8 +23,8 @@ class Simon
   def take_turn
     show_sequence
     require_sequence
-    @sequence_length += 1
     unless game_over
+      @sequence_length += 1
       round_success_message
       sleep 2
     end
@@ -37,14 +37,17 @@ class Simon
       puts color.to_s
       sleep 0.75
       system("clear")
+      sleep 0.25
     end
   end
 
   def require_sequence
     count_guess = 0
+    puts "Please enter the colors you saw one at a time:
+          red blue green yellow."
+    sleep 1
     while count_guess < sequence_length
-      puts "Please enter the colors you saw one at a time:
-            red blue green yellow."
+      puts "Please enter the #{get_count(count_guess)} color:"
       response = gets.chomp
       if response != seq[count_guess]
         @game_over = true
@@ -59,17 +62,26 @@ class Simon
   end
 
   def round_success_message
-    puts "Congrats! You remember all the colors correctly!"
+    puts "Congrats! You remember all the colors correctly! Next round:"
   end
 
   def game_over_message
-    puts "Oops! Game is over. Try again."
+    puts "Oops! Game is over. You made it #{sequence_length - 1} rounds. Try again."
   end
 
   def reset_game
     @sequence_length = 1
     @game_over = false
     @seq = []
+  end
+
+  private
+
+  def get_count(count_guess)
+    return "1st" if count_guess == 0
+    return "2nd" if count_guess == 1
+    return "3rd" if count_guess == 2
+    "#{count_guess + 1}th"
   end
 end
 
