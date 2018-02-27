@@ -1,3 +1,9 @@
+=begin
+If this file cannot be loaded into pry, install gem:
+$ gem install sqlite3
+Then under pry:
+> require './plays.rb'
+=end
 require 'sqlite3'
 require 'singleton'
 
@@ -28,7 +34,7 @@ class Play
       WHERE
         title = ?
     SQL
-    return nil unless play.length > 0
+    return nil if play.empty?
 
     Play.new(play.first) # play is stored in an array
   end
@@ -81,6 +87,25 @@ class Play
 end
 
 class Playwrights
+  def self.all
+    data = PlayDBConnection.instance.execute("SELECT * FROM playwrights")
+    data.map { |datum| Play.new(datum) }
+  end
+
+  def self.find_by_name(name)
+    playwright = PlayDBConnection.instance.execute(<<-SQL, name)
+      SELECT
+        *
+      FROM
+        playwrights
+      WHERE
+        name = ?
+    SQL
+    return nil if playwright.empty?
+
+    Playwright.new(playwright.first)
+  end
+
   def initialize(options)
     @id = options['id']
     @name = options['name']
@@ -99,7 +124,7 @@ class Playwrights
   end
 
   def update
-    raise "#{self} already in database" if @id
+    raise "#{self} not in database" unless @id
     PlayDBConnection.instance.execute(<<-SQL, @name, @birth_year, @id)
       UPDATE
         playwrights (name, birth_year)
@@ -111,7 +136,7 @@ class Playwrights
   end
 
   def get_plays
-    raise "#{self} already in database" unless @id
+    raise "#{self} not in database" unless @id
     plays = PlayDBConnection.instance.execute(<<-SQL, @id)
       SELECT
         *
