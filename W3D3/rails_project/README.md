@@ -242,3 +242,54 @@ Create instance and insert it into table directly:
   Person Load (0.7ms)  SELECT  "people".* FROM "people" ORDER BY "people"."id" DESC LIMIT $1  [["LIMIT", 1]]
 => #<Person:0x007fd429f96578 id: 3, name: "David", house_id: 1>
 ```
+
+## Phase 3: Create associations
+**Reload the rails console after making changes in files**
+pry(main)> reload!
+
+person.rb:
+```
+class Person < ActiveRecord::Base
+  belongs_to :house,
+    primary_key: :id,
+    foreign_key: :house_id,
+    class_name: 'House'
+end
+```
+house.rb:
+```
+class House < ActiveRecord::Base
+  has_many :people,
+    primary_key: :id,
+    foreign_key: :house_id,
+    class_name: 'Person'
+end
+```
+Now, under rails console, we can use the methods, for example:
+```
+[3] pry(main)> house = House.last
+  House Load (0.5ms)  SELECT  "houses".* FROM "houses" ORDER BY "houses"."id" DESC LIMIT $1  [["LIMIT", 1]]
+=> #<House:0x007fd42e87b3d8 id: 1, address: "1111 M St">
+[4] pry(main)> house.people
+  Person Load (0.6ms)  SELECT "people".* FROM "people" WHERE "people"."house_id" = $1  [["house_id", 1]]
+=> [#<Person:0x007fd42b17ead8 id: 1, name: "Jeff", house_id: 1>,
+ #<Person:0x007fd42b17e6c8 id: 3, name: "David", house_id: 1>]
+```
+You don't only have the getter method house.people, you also have the setter method! For example:
+```
+[7] pry(main)> house.people = Person.all
+  Person Load (0.7ms)  SELECT "people".* FROM "people"
+=> [#<Person:0x007fd42a778868 id: 1, name: "Jeff", house_id: 1>,
+ #<Person:0x007fd42a778700 id: 3, name: "David", house_id: 1>]
+```
+You can also push elements to the array:
+```
+[9] pry(main)> house.people << Person.first
+  Person Load (0.5ms)  SELECT  "people".* FROM "people" ORDER BY "people"."id" ASC LIMIT $1  [["LIMIT", 1]]
+   (0.6ms)  BEGIN
+  House Load (0.3ms)  SELECT  "houses".* FROM "houses" WHERE "houses"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+   (0.3ms)  COMMIT
+=> [#<Person:0x007fd42a778868 id: 1, name: "Jeff", house_id: 1>,
+ #<Person:0x007fd42a778700 id: 3, name: "David", house_id: 1>,
+ #<Person:0x007fd42a6b3ba8 id: 1, name: "Jeff", house_id: 1>]
+```
