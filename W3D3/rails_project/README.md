@@ -1,13 +1,13 @@
 # Rails demo_project
 ## Phase 1. Rails New
-###1. Create a new rails project.
+### 1. Create a new rails project.
 Use -d postgresql to set the database to PostgreSQL.
 ```
 $ gem install rails -v '5.1.2'
 $ rails new demo_project --database=postgresql
 ```
 
-###2. Add gems for development in the Gemfile.
+### 2. Add gems for development in the Gemfile.
 
   ```
   group :development do
@@ -30,8 +30,8 @@ $ rails new demo_project --database=postgresql
   - Make sure you are in the `demo_project` directory and run `bundle install`.
 
 ## Phase 2. Create Models and Migrations
-###1. Migrations
-####Step1
+### 1. Migrations
+#### Step1
 Notes from video2: We can write SQL syntax in ruby files to create tables, but we can also use Migrations to have rails write it for us. Migrations: paper trail of how the database got to the current state.
 
 ```
@@ -49,7 +49,7 @@ class CreateHouses < ActiveRecord::Migration[5.1]
 end
 ```
 
-####Step2
+#### Step2
 * Error:
 Run migrations that haven't been run:
 ```
@@ -87,7 +87,7 @@ demo_project/db/schema.rb
 In this file, we can see the tables that we just created.
 We can't see the id column here, but we will have the id column in the table.
 
-####Step3
+#### Step3
 Do the same thing to create the People table.
 ```
 $ rails g migration CreatePeople
@@ -108,7 +108,7 @@ Then run the migration:
 $ rake db:migrate
 ```
 
-####Side Note 1
+#### Side Note 1
 To delete the table we just created using migration, run:
 ```
 $ rake db:rollback
@@ -131,7 +131,7 @@ end
 ```
 Every house can have a price but is not required to.
 
-####Side Note 2
+#### Side Note 2
 I made a mistake and wanted to redo the project.
 
 Got this error:
