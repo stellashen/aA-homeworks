@@ -151,3 +151,94 @@ DROP DATABASE
 sheny=# drop database demo_project_test;
 DROP DATABASE
 ```
+
+### 2.Models
+Under the directory demo_project/app/models,
+make two new files: house.rb, person.rb
+```
+class House < ActiveRecord::Base
+end
+```
+Under Terminal:
+enter rails console, create a House instance, and insert it into the houses table.
+```
+~/Dropbox/AA/aA-homeworks/W3D3/rails_project/demo_project (master)$ rails c
+Running via Spring preloader in process 88482
+Loading development environment (Rails 5.1.5)
+No entry for terminal type "gem/ruby/2.3.0";
+using dumb terminal settings.
+[1] pry(main)> House
+=> House (call 'House.connection' to establish a connection)
+[2] pry(main)> h = House.new
+=> #<House:0x007fd429cff350 id: nil, address: nil>
+[3] pry(main)> h.address = "1111 M St"
+=> "1111 M St"
+[4] pry(main)> h.save
+   (0.2ms)  BEGIN
+  SQL (1.2ms)  INSERT INTO "houses" ("address") VALUES ($1) RETURNING "id"  [["address", "1111 M St"]]
+   (0.7ms)  COMMIT
+=> true
+```
+Read the data:
+```
+[5] pry(main)> bar = House.first
+  House Load (0.4ms)  SELECT  "houses".* FROM "houses" ORDER BY "houses"."id" ASC LIMIT $1  [["LIMIT", 1]]
+=> #<House:0x007fd42b8f9df8 id: 1, address: "1111 M St">
+```
+Create two people: Jeff and Jane
+```
+[6] pry(main)> jeff = Person.new(name: "Jeff", house_id: 1)
+=> #<Person:0x007fd42a6f33e8 id: nil, name: "Jeff", house_id: 1>
+[7] pry(main)> jeff.name
+=> "Jeff"
+[8] pry(main)> jeff.save
+   (0.3ms)  BEGIN
+  SQL (1.6ms)  INSERT INTO "people" ("name", "house_id") VALUES ($1, $2) RETURNING "id"  [["name", "Jeff"], ["house_id", 1]]
+   (0.8ms)  COMMIT
+=> true
+[9] pry(main)> jane = Person.new(name: "Jane", house_id: 1)
+=> #<Person:0x007fd42da21ad0 id: nil, name: "Jane", house_id: 1>
+[10] pry(main)> jane.save
+   (0.3ms)  BEGIN
+  SQL (0.6ms)  INSERT INTO "people" ("name", "house_id") VALUES ($1, $2) RETURNING "id"  [["name", "Jane"], ["house_id", 1]]
+   (1.8ms)  COMMIT
+=> true
+[11] pry(main)> Person.all
+  Person Load (0.5ms)  SELECT "people".* FROM "people"
+=> [#<Person:0x007fd42e84ab48 id: 1, name: "Jeff", house_id: 1>,
+ #<Person:0x007fd42e84a940 id: 2, name: "Jane", house_id: 1>]
+[12] pry(main)> Person.last
+  Person Load (0.5ms)  SELECT  "people".* FROM "people" ORDER BY "people"."id" DESC LIMIT $1  [["LIMIT", 1]]
+=> #<Person:0x007fd42d9b0128 id: 2, name: "Jane", house_id: 1>
+```
+Remove Jane:
+```
+[13] pry(main)> jane.destroy
+   (0.3ms)  BEGIN
+  SQL (0.9ms)  DELETE FROM "people" WHERE "people"."id" = $1  [["id", 2]]
+   (1.7ms)  COMMIT
+=> #<Person:0x007fd42da21ad0 id: 2, name: "Jane", house_id: 1>
+[14] pry(main)> Person.all
+  Person Load (0.5ms)  SELECT "people".* FROM "people"
+=> [#<Person:0x007fd42d9099b8 id: 1, name: "Jeff", house_id: 1>]
+```
+find methods:
+```
+[15] pry(main)> Person.find(1)           
+  Person Load (0.3ms)  SELECT  "people".* FROM "people" WHERE "people"."id" = $1 LIMIT $2  [["id", 1], ["LIMIT", 1]]
+=> #<Person:0x007fd429fb4fc8 id: 1, name: "Jeff", house_id: 1>
+[16] pry(main)> Person.find_by(name: "Jeff")
+  Person Load (0.5ms)  SELECT  "people".* FROM "people" WHERE "people"."name" = $1 LIMIT $2  [["name", "Jeff"], ["LIMIT", 1]]
+=> #<Person:0x007fd42d892160 id: 1, name: "Jeff", house_id: 1>
+```
+Create instance and insert it into table directly:
+```
+[17] pry(main)> Person.create(name: "David", house_id: 1)
+   (0.2ms)  BEGIN
+  SQL (0.6ms)  INSERT INTO "people" ("name", "house_id") VALUES ($1, $2) RETURNING "id"  [["name", "David"], ["house_id", 1]]
+   (1.7ms)  COMMIT
+=> #<Person:0x007fd42d832aa8 id: 3, name: "David", house_id: 1>
+[18] pry(main)> Person.last
+  Person Load (0.7ms)  SELECT  "people".* FROM "people" ORDER BY "people"."id" DESC LIMIT $1  [["LIMIT", 1]]
+=> #<Person:0x007fd429f96578 id: 3, name: "David", house_id: 1>
+```
