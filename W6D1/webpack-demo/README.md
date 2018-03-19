@@ -1,4 +1,7 @@
 # Terminal
+I was following this guide:
+https://webpack.js.org/guides/getting-started/
+
 ## Basic setup
 ```sh
 Last login: Sat Mar 17 22:17:53 on ttys000
@@ -124,7 +127,7 @@ The 'mode' option has not been set. Set 'mode' option to 'development' or 'produ
 ```
 
 ## Set the mode option
-reference: [https://www.valentinog.com/blog/webpack-4-tutorial/#webpack_4_production_and_development_mode]
+reference: https://www.valentinog.com/blog/webpack-4-tutorial/#webpack_4_production_and_development_mode
 
 "webpack 4 introduces production and development mode."
 
@@ -136,4 +139,31 @@ Add the following code to `package.json`:
   "dev": "webpack --mode development",
   "build": "webpack --mode production"
 }
+```
+
+reference: https://scotch.io/tutorials/whats-new-in-webpack-4#the-mode-property
+You can set your mode in the webpack.config.js file to either development or production.
+```
+module.exports = {
+  mode: 'development'
+}
+```
+## NPM Scripts
+```sh
+~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ npm run build
+
+> webpack-demo@1.0.0 build /Users/sheny/Dropbox/AA/aA-homeworks/W6D1/webpack-demo
+> webpack --mode production
+
+Hash: 8ec3b66b6a8865a2e29f
+Version: webpack 4.1.1
+Time: 368ms
+Built at: 2018-3-19 00:56:45
+    Asset      Size  Chunks             Chunk Names
+bundle.js  69.9 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] ./src/index.js 256 bytes {0} [built]
+    + 1 hidden module
 ```
