@@ -1,3 +1,5 @@
+# Terminal
+## Basic set up
 ```sh
 Last login: Sat Mar 17 22:17:53 on ttys000
 ~$ npm install -g webpack
@@ -62,45 +64,9 @@ npm WARN webpack-demo@1.0.0 No repository field.
 
 + webpack@4.1.1
 added 422 packages in 17.12s
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ touch index.html
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ touch /src
-touch: /src: Permission denied
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ touch index.js
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ atom .
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ rm index.js
-~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ cd ..
-~/Dropbox/AA/aA-homeworks/W6D1 (master)$ cd ..
-~/Dropbox/AA/aA-homeworks (master)$ g
-On branch master
-Your branch is up to date with 'hwk/master'.
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-
-	W6D1/
-
-nothing added to commit but untracked files present (use "git add" to track)
-~/Dropbox/AA/aA-homeworks (master)$ git add .
-~/Dropbox/AA/aA-homeworks (master)$ git commit -m "Webpack basic setup"
-[master 0aa3d66] Webpack basic setup
- 4 files changed, 3768 insertions(+)
- create mode 100644 W6D1/webpack-demo/index.html
- create mode 100644 W6D1/webpack-demo/package-lock.json
- create mode 100644 W6D1/webpack-demo/package.json
- create mode 100644 W6D1/webpack-demo/src/index.js
-~/Dropbox/AA/aA-homeworks (master)$ git push
-Counting objects: 9, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (7/7), done.
-Writing objects: 100% (9/9), 24.12 KiB | 6.03 MiB/s, done.
-Total 9 (delta 1), reused 0 (delta 0)
-remote: Resolving deltas: 100% (1/1), completed with 1 local object.
-To https://github.com/stellashen/aA-homeworks.git
-   e638ba7..0aa3d66  master -> master
-~/Dropbox/AA/aA-homeworks (master)$ cd W6D1
-~/Dropbox/AA/aA-homeworks/W6D1 (master)$ ls
-webpack-demo
-~/Dropbox/AA/aA-homeworks/W6D1 (master)$ cd webpack-demo
+```
+## Create a bundle
+```sh
 ~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ npm install --save lodash
 npm WARN webpack-demo@1.0.0 No description
 npm WARN webpack-demo@1.0.0 No repository field.
