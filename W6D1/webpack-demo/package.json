@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.5"
+  },
+  "scripts": {
+    "dev": "webpack --mode development"
   }
 }

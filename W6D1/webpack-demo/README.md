@@ -1,5 +1,5 @@
 # Terminal
-## Basic set up
+## Basic setup
 ```sh
 Last login: Sat Mar 17 22:17:53 on ttys000
 ~$ npm install -g webpack
@@ -65,7 +65,7 @@ npm WARN webpack-demo@1.0.0 No repository field.
 + webpack@4.1.1
 added 422 packages in 17.12s
 ```
-## Create a bundle
+## Creating a bundle
 ```sh
 ~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ npm install --save lodash
 npm WARN webpack-demo@1.0.0 No description
@@ -101,4 +101,39 @@ Entrypoint main = bundle.js
 
 WARNING in configuration
 The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+```
+
+## Using a Configuration
+```sh
+~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ touch webpack.config.js
+~/Dropbox/AA/aA-homeworks/W6D1/webpack-demo (master)$ npx webpack --config webpack.config.js
+Hash: dabab1bac2b940c1462b
+Version: webpack 4.1.1
+Time: 355ms
+Built at: 2018-3-19 00:41:07
+    Asset      Size  Chunks             Chunk Names
+bundle.js  69.9 KiB       0  [emitted]  main
+Entrypoint main = bundle.js
+   [1] (webpack)/buildin/module.js 519 bytes {0} [built]
+   [2] (webpack)/buildin/global.js 509 bytes {0} [built]
+   [3] ./src/index.js 256 bytes {0} [built]
+    + 1 hidden module
+
+WARNING in configuration
+The 'mode' option has not been set. Set 'mode' option to 'development' or 'production' to enable defaults for this environment.
+```
+
+## Set the mode option
+reference: [https://www.valentinog.com/blog/webpack-4-tutorial/#webpack_4_production_and_development_mode]
+
+"webpack 4 introduces production and development mode."
+
+"In webpack 4 you can get by without a single line of configuration! Just define the --modeflag and you get everything for free!"
+
+Add the following code to `package.json`:
+```
+"scripts": {
+  "dev": "webpack --mode development",
+  "build": "webpack --mode production"
+}
 ```
