@@ -6,9 +6,10 @@
 function titleize(names, callback) {
   let titleized = names.map(name => `Mx. ${name} Jingleheimer Schmidt`);
   callback(titleized);
-};
+}
 
 // invoking the function
+// write print function as callback
 titleize(["Mary", "Brian", "Leo"], (names) => {
   names.forEach(name => console.log(name));
 });
@@ -34,17 +35,26 @@ Elephant.prototype.addTrick = function (trick) {
 };
 
 Elephant.prototype.play = function () {
-  trickIndex = Math.floor(Math.random() * this.tricks.length);
+  let trickIndex = Math.floor(Math.random() * this.tricks.length);
   console.log(`${this.name} is ${this.tricks[trickIndex]}!`);
 };
 
 // Phase III - Function Invocation
+let ellie = new Elephant("Ellie", 185, ["giving human friends a ride",
+"playing hide and seek"]);
+let charlie = new Elephant("Charlie", 200, ["painting pictures",
+"spraying water for a slip and slide"]);
+let kate = new Elephant("Kate", 234, ["writing letters", "stealing peanuts"]);
+let micah = new Elephant("Micah", 143, ["trotting", "playing tic tac toe",
+"doing elephant ballet"]);
+
+let herd = [ellie, charlie, kate, micah];
 
 Elephant.paradeHelper = function (elephant) {
   console.log(`${elephant.name} is trotting by!`);
 };
 
-
+herd.forEach(Elephant.paradeHelper);
 
 // Phase IV - Closures
 
@@ -56,4 +66,4 @@ function dinerBreakfast() {
     order = `${order.slice(0, order.length - 8)} and ${food} please.`;
     console.log(order);
   };
-};
+}

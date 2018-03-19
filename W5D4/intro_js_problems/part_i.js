@@ -74,7 +74,7 @@ function isSubstring(phrase, subphrase) {
 // Phase II
 
 // fizzBuzz
-
+// ^: Bitwise XOR
 function fizzBuzz (array) {
   const fizzBuzzArr = [];
 
