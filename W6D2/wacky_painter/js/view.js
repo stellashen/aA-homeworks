@@ -23,6 +23,7 @@ View.prototype.exercise1 = function () {
   //Result: Every square should turn orange (we already have a CSS rule)
 
   //your code here!
+  $("li").addClass("orange");
 };
 
 View.prototype.exercise2 = function () {
@@ -30,6 +31,7 @@ View.prototype.exercise2 = function () {
   //Result: Every square vanishes
 
   //your code here!
+  $(".square").remove();
 };
 
 View.prototype.exercise3 = function () {
@@ -37,6 +39,8 @@ View.prototype.exercise3 = function () {
   //Result: An <h1> with the text 'i love jquery' appears under the grid.
 
   //your code here!
+  const h1 = $("<h1>").text("I love jQuery");
+  $("#easel").append(h1);
 };
 
 View.prototype.exercise4 = function () {
@@ -44,6 +48,8 @@ View.prototype.exercise4 = function () {
   //Result: Your name appears in every other square.
 
   //your code here!
+  $(".square:nth-child(even)").text("Y");
+  //this could also be solved using iteration and %
 };
 
 View.prototype.exercise5 = function () {
@@ -55,6 +61,10 @@ View.prototype.exercise5 = function () {
   //  'data-pos' of every square
 
   //your code here!
+  $('.square').on("click", e => {
+    const $sq = $(e.currentTarget);
+    alert($sq.attr("data-pos"));
+  });
 };
 
 View.prototype.exercise6 = function () {
@@ -65,6 +75,10 @@ View.prototype.exercise6 = function () {
   //hint: use window._randomColorString() (defined at top) to get a random color!
 
   //your code here!
+  $('.square').each( (idx, el) => {
+    var $sq = $(el);
+    $sq.css("background-color", _randomColorString());
+  })
 };
 
 View.prototype.exercise7 = function(){
@@ -75,8 +89,11 @@ View.prototype.exercise7 = function(){
   //rainbow.
 
   //your code here!
+  $('#easel').on("mouseenter", ".square", e => {
+    const $sq = $(e.currentTarget);
+    console.log($sq.css("background-color"));
+  });
 };
-
 
 
 View.prototype.setupEasel = function() {
@@ -90,6 +107,7 @@ View.prototype.setupEasel = function() {
     this.$el.append($button);
   }
 
+  // add 20 rows
   for(let i = 0; i < 20; i ++) {
     this.addRow();
   }
@@ -100,6 +118,8 @@ View.prototype.addRow = function() {
   const $row = $("<ul>").addClass("row").addClass("group");
   for(let colIdx = 0; colIdx < 20; colIdx++) {
     const $square = $("<li>").addClass("square").attr("data-pos", [rowIdx, colIdx]);
+    // each square has a position
+    // append to each square
     $square.on("mouseenter", (e) => {
       const $square = $(e.currentTarget);
       $square.css("background-color", window._randomColorString());
