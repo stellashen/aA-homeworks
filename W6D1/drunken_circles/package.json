@@ -1,0 +1,16 @@
+{
+  "name": "drunken_circles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
