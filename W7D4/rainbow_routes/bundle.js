@@ -12486,18 +12486,6 @@ var _violet = __webpack_require__(117);
 
 var _violet2 = _interopRequireDefault(_violet);
 
-var _orange = __webpack_require__(115);
-
-var _orange2 = _interopRequireDefault(_orange);
-
-var _yellow = __webpack_require__(118);
-
-var _yellow2 = _interopRequireDefault(_yellow);
-
-var _indigo = __webpack_require__(114);
-
-var _indigo2 = _interopRequireDefault(_indigo);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12527,15 +12515,32 @@ var Rainbow = function (_React$Component) {
           'Rainbow Router!'
         ),
         _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/red' },
+          'Red'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/green' },
+          'Green'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/blue' },
+          'Blue'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/violet' },
+          'Violet'
+        ),
+        _react2.default.createElement(
           'div',
           { id: 'rainbow' },
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/red', component: _red2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/red', component: _red2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { path: '/green', component: _green2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/blue', component: _blue2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/violet', component: _violet2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/red/orange', component: _orange2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/red/yellow', component: _yellow2.default }),
-          _react2.default.createElement(_reactRouterDom.Route, { path: '/blue/indigo', component: _indigo2.default })
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/blue', component: _blue2.default }),
+          _react2.default.createElement(_reactRouterDom.Route, { path: '/violet', component: _violet2.default })
         )
       );
     }
@@ -12602,15 +12607,24 @@ var Blue = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('h2', { className: 'blue' })
+        _react2.default.createElement('h2', { className: 'blue' }),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { exact: true, to: '/blue' },
+          'Blue Only'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/blue/indigo' },
+          'Add Indigo'
+        ),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/blue/indigo', component: _indigo2.default })
       );
     }
   }]);
 
   return Blue;
 }(_react2.default.Component);
-
-;
 
 exports.default = Blue;
 
@@ -12745,15 +12759,30 @@ var Red = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement('h2', { className: 'red' })
+        _react2.default.createElement('h2', { className: 'red' }),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { exact: true, to: '/red' },
+          'Red Only'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/red/orange' },
+          'Add Orange'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/red/yellow' },
+          'Add Yellow'
+        ),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/red/orange', component: _orange2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/red/yellow', component: _yellow2.default })
       );
     }
   }]);
 
   return Red;
 }(_react2.default.Component);
-
-;
 
 exports.default = Red;
 
