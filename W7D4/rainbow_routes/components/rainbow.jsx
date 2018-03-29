@@ -9,6 +9,9 @@ import Red from './red';
 import Green from './green';
 import Blue from './blue';
 import Violet from './violet';
+import Orange from './orange';
+import Yellow from './yellow';
+import Indigo from './indigo';
 
 class Rainbow extends React.Component {
   render() {
@@ -18,11 +21,19 @@ class Rainbow extends React.Component {
         {/* Your links should go here */}
 
         <div id="rainbow">
-          {/* Your routes should go here */}
+          {<Route exact path="/red" component={Red} />}
+          {<Route path="/green" component={Green} />}
+          {<Route exact path="/blue" component={Blue} />}
+          {<Route path="/violet" component={Violet} />}
+
+          {<Route path="/red/orange" component={Orange} />}
+          {<Route path="/red/yellow" component={Yellow} />}
+          {<Route path="/blue/indigo" component={Indigo} />}
+
         </div>
       </div>
     );
   }
-};
+}
 
 export default Rainbow;
